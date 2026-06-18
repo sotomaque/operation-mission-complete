@@ -47,9 +47,12 @@ export function IdentityGate() {
   }
 
   function handleNo() {
-    // Honor the `?next=` param if a deep-link bounced through the gate
-    // (the /mission/[code] route could send ?next=/mission/adventure).
-    router.replace(next || "/mission");
+    // `push` (not `replace`) so the browser back button traces back
+    // here — easter egg: guests can revisit the gate and click "Yes
+    // I'm Josh" for kicks, locking themselves out of the invite for
+    // the joke. The "Yes" path still uses `replace` because that's
+    // the lock-in moment for actual Josh.
+    router.push(next || "/mission");
   }
 
   // Avoid flashing the gate before the localStorage check resolves.

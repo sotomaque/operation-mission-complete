@@ -52,10 +52,20 @@ export function DossierFrame({
           {children}
         </article>
 
-        {/* Footer band: file metadata */}
+        {/* Footer band: file metadata + easter-egg re-verify link. The
+            "wait — am I Josh?" link routes back to / where curious
+            guests can pick "Yes" for the joke and permanently lock
+            themselves out. Subtle so it reads as flavor text, not
+            navigation. */}
         <div className="mt-3 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.25em] text-dossier-fg-muted">
           <span>Distribution: Restricted</span>
-          <span>This document self-destructs · 08·16·26</span>
+          <a
+            href="/"
+            className="text-dossier-fg-muted hover:text-copper-bright transition-colors"
+          >
+            Wait — am I Josh?
+          </a>
+          <span>Self-destructs · 08·16·26</span>
         </div>
       </div>
     </main>

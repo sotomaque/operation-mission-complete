@@ -128,20 +128,24 @@ function AdventureOptionCard() {
             className="text-2xl text-dossier-ink leading-snug mb-2"
             style={{ fontFamily: "'Pirata One', serif" }}
           >
-            Set sail at four-thirty bells
+            Rendezvous at four-thirty bells
+          </p>
+          <p className="font-mono text-sm text-dossier-ink mb-2">
+            Rendezvous for the adventure at 4:30 — or join the
+            after-party at 6:30 (your call once you arrive).
           </p>
           <ul className="space-y-1 font-mono text-sm text-dossier-ink">
             <li>
-              <span className="text-dossier-ink-muted">Arrival</span> ·
-              4:30 PM
+              <span className="text-dossier-ink-muted">Nature</span> ·
+              Classified, declassified day-of
             </li>
             <li>
               <span className="text-dossier-ink-muted">Duration</span> ·
-              Up to 2 hours on the water
+              Approximately 2 hours
             </li>
             <li>
               <span className="text-dossier-ink-muted">Followed by</span>
-              · Welcome Party at 6:30 PM (same location)
+              · Welcome Party at 6:30 PM (same rendezvous point)
             </li>
           </ul>
         </div>

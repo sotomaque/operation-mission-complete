@@ -75,7 +75,7 @@ export function RsvpForm({
             onClick={() => setRsvpChoice("declined")}
             top="—"
             title="Can't make it"
-            note="With regrets"
+            note="Will regret on deathbed"
           />
         </div>
       </fieldset>
