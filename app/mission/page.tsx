@@ -40,7 +40,7 @@ export default function MissionLanding() {
               Adventure + Welcome
             </p>
             <p className="font-mono text-xs text-dossier-ink-muted">
-              Includes the maritime expedition.
+              Daytime mystery + evening rendezvous.
             </p>
           </div>
         </Link>
