@@ -78,14 +78,14 @@ export default async function MissionRsvpPage({
             Rendezvous Point
           </p>
           <p className="font-serif text-xl text-dossier-ink leading-snug">
-            Outside Top Sail
+            Drop Point Foxtrot
           </p>
           <p className="font-mono text-sm text-dossier-ink-muted">
             1360 N Harbor Dr, San Diego, CA 92101
           </p>
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-dossier-ink-faint mt-1">
-            Meet outside the restaurant. Do not enter ahead of the
-            handler.
+            Meet curbside. Stand by for handler contact. Do not enter
+            any establishment ahead of pickup.
           </p>
         </div>
 

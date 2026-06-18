@@ -11,6 +11,22 @@ import { requireAdmin } from "@/lib/admin-guard";
  * The encoded URL uses NEXT_PUBLIC_APP_URL so it's correct per
  * environment — preview deploys generate preview QRs, prod generates
  * prod QRs.
+ *
+ * Both QRs route through the identity gate FIRST via `/?next=/mission
+ * /{code}`. Two reasons:
+ *
+ *   1. Surprise integrity. A QR that goes straight to `/mission/welcome`
+ *      gives Josh no chance to opt himself into the decoy — the gate is
+ *      the single entry point that protects him from accidentally
+ *      reading the briefing.
+ *   2. Cleaner UX. The deep-link path used to depend on `<GateBounce>`
+ *      checking localStorage post-paint, which could flash one frame of
+ *      the form before bouncing. Routing through `/` means the
+ *      localStorage check happens before any form renders.
+ *
+ * After "No — proceed" on the gate, `next` is honored by the identity
+ * gate (`searchParams.get("next")`), so the Welcome QR still surfaces
+ * Welcome-only and the Adventure QR still surfaces both options.
  */
 
 const SHEETS = [
@@ -43,7 +59,11 @@ export default async function QrPage() {
 
   const codes = await Promise.all(
     SHEETS.map(async (s) => {
-      const url = `${base}/mission/${s.code}`;
+      // Route through the identity gate. `?next=` is honored by the
+      // gate so the guest still lands on the right RSVP page after
+      // confirming they're not Josh.
+      const next = `/mission/${s.code}`;
+      const url = `${base}/?next=${encodeURIComponent(next)}`;
       const svg = await makeSvg(url);
       return { ...s, url, svg };
     }),

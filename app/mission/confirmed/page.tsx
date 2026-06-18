@@ -79,7 +79,7 @@ export default async function ConfirmedPage({
             Saturday, 15 August 2026
           </p>
           <p className="font-mono text-xs text-dossier-ink-muted mt-3">
-            Top Sail · 1360 N Harbor Dr, San Diego, CA 92101
+            Drop Point Foxtrot · 1360 N Harbor Dr, San Diego, CA 92101
           </p>
         </div>
 
