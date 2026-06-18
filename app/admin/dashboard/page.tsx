@@ -8,6 +8,7 @@ import { getSupabaseAdmin, type Rsvp } from "@/lib/supabase";
 import { CapacityEditor } from "./capacity-editor";
 import { EditRsvpDialog } from "./edit-rsvp-dialog";
 import { DeleteRsvpButton } from "./delete-rsvp-button";
+import { RsvpMobileCard } from "./rsvp-mobile-card";
 
 /**
  * Admin dashboard — guest manifest, capacity counters, search, edit,
@@ -85,31 +86,33 @@ export default async function DashboardPage({
   });
 
   return (
-    <main className="min-h-screen px-4 py-8 max-w-7xl mx-auto">
-      {/* Header band */}
-      <div className="flex items-end justify-between gap-4 mb-6">
+    <main className="min-h-screen px-3 py-6 sm:px-4 sm:py-8 max-w-7xl mx-auto">
+      {/* Header band. Title on top, actions below on mobile. Actions
+          flow-wrap on small screens so they're never crammed; on `sm:`+
+          they sit on a single row aligned to the right. */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-6">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-dossier-fg-muted">
+          <p className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-dossier-fg-muted">
             Operation: Mission Complete
           </p>
-          <h1 className="font-serif text-3xl text-dossier-fg leading-tight">
+          <h1 className="font-serif text-2xl sm:text-3xl text-dossier-fg leading-tight">
             Guest Manifest
           </h1>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <Link href="/admin/qr">
             <Button variant="ghost" size="sm">
-              QR Codes
+              QR
             </Button>
           </Link>
           <Link href="/admin/email">
             <Button variant="ghost" size="sm">
-              Email Blast
+              Email
             </Button>
           </Link>
           <Link href="/admin/export">
             <Button variant="ghost" size="sm">
-              Export CSV
+              Export
             </Button>
           </Link>
           <form action="/admin/logout" method="POST">
@@ -142,12 +145,14 @@ export default async function DashboardPage({
           be controlled and the submit is a server action. */}
       <CapacityEditor currentCap={adventureCap} taken={totals.adventure} />
 
-      {/* Filter bar */}
+      {/* Filter bar. Mobile: full-width stacked inputs, two-button row
+          at the bottom. `sm:+`: horizontal flow with search expanding
+          to fill remaining space. */}
       <form
         method="GET"
-        className="flex flex-wrap items-end gap-2 my-6 p-4 bg-dossier-bg-elevated rounded-sm border border-dossier-fg/10"
+        className="my-6 p-4 bg-dossier-bg-elevated rounded-sm border border-dossier-fg/10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end sm:gap-2"
       >
-        <div className="flex-1 min-w-48">
+        <div className="sm:flex-1 sm:min-w-48">
           <label
             htmlFor="q"
             className="block font-mono text-[10px] uppercase tracking-[0.25em] text-dossier-fg-muted mb-1"
@@ -162,55 +167,73 @@ export default async function DashboardPage({
             className="bg-dossier-bg border-dossier-fg/20 text-dossier-fg placeholder:text-dossier-fg-muted/60"
           />
         </div>
-        <div>
-          <label
-            htmlFor="choice"
-            className="block font-mono text-[10px] uppercase tracking-[0.25em] text-dossier-fg-muted mb-1"
-          >
-            Choice
-          </label>
-          <select
-            id="choice"
-            name="choice"
-            defaultValue={sp.choice ?? ""}
-            className="h-11 px-3 rounded-sm border border-dossier-fg/20 bg-dossier-bg text-dossier-fg font-mono text-sm"
-          >
-            <option value="">All</option>
-            <option value="adventure">Adventure</option>
-            <option value="welcome">Welcome</option>
-            <option value="declined">Declined</option>
-          </select>
+        <div className="grid grid-cols-2 gap-2 sm:contents">
+          <div>
+            <label
+              htmlFor="choice"
+              className="block font-mono text-[10px] uppercase tracking-[0.25em] text-dossier-fg-muted mb-1"
+            >
+              Choice
+            </label>
+            <select
+              id="choice"
+              name="choice"
+              defaultValue={sp.choice ?? ""}
+              className="h-11 w-full px-3 rounded-sm border border-dossier-fg/20 bg-dossier-bg text-dossier-fg font-mono text-sm"
+            >
+              <option value="">All</option>
+              <option value="adventure">Adventure</option>
+              <option value="welcome">Welcome</option>
+              <option value="declined">Declined</option>
+            </select>
+          </div>
+          <div>
+            <label
+              htmlFor="invite"
+              className="block font-mono text-[10px] uppercase tracking-[0.25em] text-dossier-fg-muted mb-1"
+            >
+              Invite link
+            </label>
+            <select
+              id="invite"
+              name="invite"
+              defaultValue={sp.invite ?? ""}
+              className="h-11 w-full px-3 rounded-sm border border-dossier-fg/20 bg-dossier-bg text-dossier-fg font-mono text-sm"
+            >
+              <option value="">All</option>
+              <option value="adventure">A · Adventure</option>
+              <option value="welcome">B · Welcome</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <label
-            htmlFor="invite"
-            className="block font-mono text-[10px] uppercase tracking-[0.25em] text-dossier-fg-muted mb-1"
-          >
-            Invite link
-          </label>
-          <select
-            id="invite"
-            name="invite"
-            defaultValue={sp.invite ?? ""}
-            className="h-11 px-3 rounded-sm border border-dossier-fg/20 bg-dossier-bg text-dossier-fg font-mono text-sm"
-          >
-            <option value="">All</option>
-            <option value="adventure">A · Adventure</option>
-            <option value="welcome">B · Welcome</option>
-          </select>
-        </div>
-        <Button type="submit" variant="primary" size="default">
-          Apply
-        </Button>
-        <Link href="/admin/dashboard">
-          <Button type="button" variant="ghost" size="default">
-            Clear
+        <div className="grid grid-cols-2 gap-2 sm:contents">
+          <Button type="submit" variant="primary" size="default" className="w-full sm:w-auto">
+            Apply
           </Button>
-        </Link>
+          <Link href="/admin/dashboard" className="w-full sm:w-auto">
+            <Button type="button" variant="ghost" size="default" className="w-full">
+              Clear
+            </Button>
+          </Link>
+        </div>
       </form>
 
-      {/* Manifest table */}
-      <div className="overflow-x-auto bg-dossier-bg-elevated rounded-sm border border-dossier-fg/10">
+      {/* Mobile manifest — cards. Hidden at md:+ where the table takes
+          over. The card layout surfaces decision-essentials (name,
+          choice, guest count, contact); everything else is one tap
+          away in the existing edit dialog. */}
+      <div className="md:hidden space-y-3">
+        {filtered.length === 0 ? (
+          <div className="rounded-sm border border-dossier-fg/10 bg-dossier-bg-elevated p-6 text-center font-mono text-sm text-dossier-fg-muted">
+            No matches.
+          </div>
+        ) : (
+          filtered.map((r) => <RsvpMobileCard key={r.id} rsvp={r} />)
+        )}
+      </div>
+
+      {/* Desktop manifest table — hidden under md: */}
+      <div className="hidden md:block overflow-x-auto bg-dossier-bg-elevated rounded-sm border border-dossier-fg/10">
         <table className="w-full font-mono text-sm">
           <thead>
             <tr className="text-left text-dossier-fg-muted text-xs uppercase tracking-[0.2em] border-b border-dossier-fg/10">
