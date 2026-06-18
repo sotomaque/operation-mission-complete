@@ -1,0 +1,191 @@
+import { notFound } from "next/navigation";
+
+import { DossierFrame } from "@/components/dossier-frame";
+import { RsvpForm } from "@/components/rsvp-form";
+import { GateBounce } from "@/components/gate-bounce";
+
+import { getAdventureCapacityStatus } from "./actions";
+
+const VALID_CODES = ["adventure", "welcome"] as const;
+type Code = (typeof VALID_CODES)[number];
+
+function isCode(c: string): c is Code {
+  return (VALID_CODES as readonly string[]).includes(c);
+}
+
+/**
+ * RSVP page. Two URL forms drive the same component:
+ *   • /mission/adventure  — both options (Adventure + Welcome) surface.
+ *   • /mission/welcome    — Welcome only.
+ *
+ * Adventure capacity is checked server-side via
+ * `getAdventureCapacityStatus()` and the option is hidden if the cap
+ * is hit. The form's server action ALSO re-checks atomically inside
+ * the Postgres function — defense in depth against the cap filling up
+ * between page render and submission.
+ *
+ * The gate (/) doesn't run as a layout, so deep links land here
+ * directly. `<GateBounce />` checks the localStorage decoy lock
+ * client-side and bounces to /decoy if Josh is here. The lock check
+ * happens fast enough that it's pre-paint for the normal case.
+ */
+export default async function MissionRsvpPage({
+  params,
+}: {
+  params: Promise<{ code: string }>;
+}) {
+  const { code } = await params;
+  if (!isCode(code)) notFound();
+
+  const showAdventure = code === "adventure";
+  const adventure = showAdventure
+    ? await getAdventureCapacityStatus()
+    : null;
+  const adventureAvailable = showAdventure && adventure?.available === true;
+
+  return (
+    <>
+      <GateBounce />
+      <DossierFrame fileNumber="OMC-1815" classification="EYES ONLY">
+        <header className="space-y-3 mb-8">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-dossier-ink-muted">
+            Mission briefing · Step 03
+          </p>
+          <h1 className="font-serif text-4xl md:text-5xl text-dossier-ink leading-tight">
+            Operation: Mission Complete
+          </h1>
+          <p className="font-serif text-lg text-dossier-ink-muted italic">
+            Subject turns 50. The target is unaware. You are not.
+          </p>
+        </header>
+
+        {/* Coordinate strip — same for both codes, gives the briefing
+            a survey-marker vibe. */}
+        <div className="coords flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-sm mb-8">
+          <div>
+            <span className="text-dossier-ink-muted">Date</span> ·{" "}
+            <span className="font-bold">Sat 15 Aug 2026</span>
+          </div>
+          <div>
+            <span className="text-dossier-ink-muted">Coords</span> ·{" "}
+            <span className="font-bold">32°43′04″N · 117°10′21″W</span>
+          </div>
+        </div>
+
+        {/* Rendezvous block — pinned for both flows. */}
+        <div className="space-y-1 mb-8 reveal-2">
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper">
+            Rendezvous Point
+          </p>
+          <p className="font-serif text-xl text-dossier-ink leading-snug">
+            Outside Top Sail
+          </p>
+          <p className="font-mono text-sm text-dossier-ink-muted">
+            1360 N Harbor Dr, San Diego, CA 92101
+          </p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-dossier-ink-faint mt-1">
+            Meet outside the restaurant. Do not enter ahead of the
+            handler.
+          </p>
+        </div>
+
+        {/* Option cards — adventure is conditional, welcome is always
+            there. Adventure shows different copy when full. */}
+        <div className="grid gap-4 mb-8 reveal-3">
+          {showAdventure && adventureAvailable ? (
+            <AdventureOptionCard />
+          ) : showAdventure ? (
+            <AdventureFullNotice />
+          ) : null}
+          <WelcomeOptionCard />
+        </div>
+
+        {/* The form. inviteType is fixed per-page; rsvpChoice comes
+            from the form's radio. */}
+        <div className="border-t border-dossier-ink/20 pt-8">
+          <RsvpForm
+            inviteType={code}
+            adventureAvailable={adventureAvailable}
+          />
+        </div>
+      </DossierFrame>
+    </>
+  );
+}
+
+function AdventureOptionCard() {
+  return (
+    <div className="border border-treasure-gold/50 bg-pirate-deep/8 rounded-sm p-5 relative">
+      <div className="flex items-start gap-3">
+        <div className="font-serif text-3xl text-treasure-gold leading-none mt-0.5">
+          ⚓
+        </div>
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper mb-1">
+            Option A · The Adventure
+          </p>
+          <p
+            className="text-2xl text-dossier-ink leading-snug mb-2"
+            style={{ fontFamily: "'Pirata One', serif" }}
+          >
+            Set sail at four-thirty bells
+          </p>
+          <ul className="space-y-1 font-mono text-sm text-dossier-ink">
+            <li>
+              <span className="text-dossier-ink-muted">Arrival</span> ·
+              4:30 PM
+            </li>
+            <li>
+              <span className="text-dossier-ink-muted">Duration</span> ·
+              Up to 2 hours on the water
+            </li>
+            <li>
+              <span className="text-dossier-ink-muted">Followed by</span>
+              · Welcome Party at 6:30 PM (same location)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AdventureFullNotice() {
+  return (
+    <div className="border border-dossier-ink/30 bg-dossier-paper/60 rounded-sm p-5">
+      <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-classified-red mb-1">
+        Option A · The Adventure
+      </p>
+      <p className="font-serif text-lg text-dossier-ink mb-1">
+        Vessel at capacity.
+      </p>
+      <p className="font-mono text-sm text-dossier-ink-muted">
+        Crew manifest is full. Please proceed with the Welcome Party
+        option — we'll see you on shore.
+      </p>
+    </div>
+  );
+}
+
+function WelcomeOptionCard() {
+  return (
+    <div className="border border-dossier-ink/30 bg-dossier-paper/60 rounded-sm p-5">
+      <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper mb-1">
+        Option B · Welcome Party
+      </p>
+      <p className="font-serif text-2xl text-dossier-ink leading-snug mb-2">
+        Join us shoreside at 6:30 PM
+      </p>
+      <ul className="space-y-1 font-mono text-sm text-dossier-ink">
+        <li>
+          <span className="text-dossier-ink-muted">Arrival</span> · 6:30
+          PM
+        </li>
+        <li>
+          <span className="text-dossier-ink-muted">Buffet</span> ·
+          Braised beef short rib or lemon-herb grilled chicken
+        </li>
+      </ul>
+    </div>
+  );
+}

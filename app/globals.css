@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/*
+ * Theme: classified-dossier outer frame × pirate-adventure inner reveal.
+ *
+ * Palette: aged-parchment ink on deep-navy ground, copper + brass accents.
+ * Real serif/mono pairings, no cartoon. The single accent color (copper)
+ * shows up sparingly so the redacted bars / coordinate strips read as
+ * type, not decoration.
+ */
+
+@theme {
+  /* Surfaces */
+  --color-dossier-bg: #0d1320;
+  --color-dossier-bg-elevated: #131a2b;
+  --color-dossier-paper: #ece2c9;
+  --color-dossier-paper-edge: #d9c9a4;
+  --color-dossier-paper-shadow: #b8a47a;
+
+  /* Ink */
+  --color-dossier-ink: #1a1810;
+  --color-dossier-ink-muted: #5a5440;
+  --color-dossier-ink-faint: #8a8470;
+
+  /* Off-paper text on dark ground */
+  --color-dossier-fg: #e3d7b8;
+  --color-dossier-fg-muted: #8a9aa8;
+
+  /* Accents */
+  --color-copper: #b8743a;
+  --color-copper-bright: #d68a47;
+  --color-brass: #c0a050;
+
+  /* Stamps / alerts */
+  --color-classified-red: #8b1f1f;
+  --color-classified-red-bright: #b03030;
+
+  /* Pirate (used only inside the adventure card) */
+  --color-treasure-gold: #d4af37;
+  --color-pirate-deep: #1a2a3a;
+
+  /* Type */
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Courier New", monospace;
+  --font-serif: "Special Elite", "Courier Prime", "Georgia", serif;
+  --font-pirate: "Pirata One", "Special Elite", serif;
+}
+
+html {
+  background: var(--color-dossier-bg);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-dossier-bg);
+  color: var(--color-dossier-fg);
+  font-family: var(--font-mono);
+  font-feature-settings: "ss01", "ss02";
+  min-height: 100vh;
+  /* Subtle SVG noise on the dark ground so it doesn't look like a
+     web app — grain texture is what sells "dossier" vs "form." */
+  background-image:
+    radial-gradient(ellipse at top, rgba(184, 116, 58, 0.03) 0%, transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-attachment: fixed;
+}
+
+/* Aged-paper texture — applied to the parchment cards inside the
+   dossier shell. Grain + warm edge shadow. */
+.paper {
+  background-color: var(--color-dossier-paper);
+  color: var(--color-dossier-ink);
+  background-image:
+    linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.15) 40%, transparent 100%),
+    radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.18), transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.04  0 0 0 0 0.02  0 0 0 0.10 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
+  box-shadow:
+    inset 0 0 60px rgba(120, 90, 40, 0.18),
+    0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(120, 90, 40, 0.3);
+}
+
+/* Redacted bar — drop in where information would have been. */
+.redacted {
+  display: inline-block;
+  background: var(--color-dossier-ink);
+  color: transparent;
+  padding: 0 0.4em;
+  margin: 0 0.1em;
+  user-select: none;
+}
+
+/* CLASSIFIED stamp — angled, slightly distressed. */
+.stamp {
+  display: inline-block;
+  border: 3px solid var(--color-classified-red);
+  color: var(--color-classified-red);
+  padding: 0.25em 0.6em;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.85em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+  opacity: 0.92;
+}
+
+/* Coordinate strip — looks like a survey marker. */
+.coords {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--color-copper-bright);
+  border-top: 1px solid rgba(184, 116, 58, 0.4);
+  border-bottom: 1px solid rgba(184, 116, 58, 0.4);
+  padding: 0.4rem 0;
+}
+
+/* Typewriter caret for the title bar. */
+@keyframes caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.caret::after {
+  content: "▮";
+  margin-left: 0.2em;
+  animation: caret 1s steps(1) infinite;
+  color: var(--color-copper-bright);
+}
+
+/* Reveal animation — the dossier "opens" on first paint. */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { animation: reveal 600ms ease-out both; }
+.reveal-2 { animation: reveal 600ms ease-out 200ms both; opacity: 0; }
+.reveal-3 { animation: reveal 600ms ease-out 400ms both; opacity: 0; }
