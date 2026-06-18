@@ -70,39 +70,43 @@ export default async function QrPage() {
   );
 
   return (
-    <main className="min-h-screen px-4 py-8 max-w-5xl mx-auto">
-      <header className="mb-8">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-dossier-fg-muted">
+    <main className="min-h-screen px-3 py-6 sm:px-4 sm:py-8 max-w-5xl mx-auto">
+      <header className="mb-6 sm:mb-8">
+        <p className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-dossier-fg-muted">
           Print-ready
         </p>
-        <h1 className="font-serif text-3xl text-dossier-fg leading-tight">
+        <h1 className="font-serif text-2xl sm:text-3xl text-dossier-fg leading-tight">
           QR Codes for Physical Invitations
         </h1>
-        <p className="font-mono text-sm text-dossier-fg-muted mt-2 max-w-2xl">
+        <p className="font-mono text-xs sm:text-sm text-dossier-fg-muted mt-2 max-w-2xl">
           Right-click any QR → Save Image As, or use the Download SVG
           button below each card. Print at any size — error-correction
           is set to H so scanning survives ink bleed and minor damage.
         </p>
       </header>
 
-      <div className="grid sm:grid-cols-2 gap-6">
+      <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
         {codes.map((c) => (
           <article
             key={c.code}
-            className="paper rounded-sm p-8 flex flex-col items-center text-center"
+            className="paper rounded-sm p-5 sm:p-8 flex flex-col items-center text-center"
           >
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper mb-1">
               Seal · {c.seal}
             </p>
-            <h2 className="font-serif text-2xl text-dossier-ink mb-1">
+            <h2 className="font-serif text-xl sm:text-2xl text-dossier-ink mb-1">
               {c.title}
             </h2>
-            <p className="font-mono text-xs text-dossier-ink-muted mb-5">
+            <p className="font-mono text-xs text-dossier-ink-muted mb-4 sm:mb-5">
               {c.note}
             </p>
 
+            {/* QR sizes down on mobile so the two stacked cards don't
+                eat ~1200px of scroll. 192px is still scannable at
+                typical viewing distance; the SVG is vector so the
+                printed output is unaffected by the on-screen size. */}
             <div
-              className="w-64 h-64 flex items-center justify-center [&_svg]:w-full [&_svg]:h-full"
+              className="w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center [&_svg]:w-full [&_svg]:h-full"
               dangerouslySetInnerHTML={{ __html: c.svg }}
             />
 

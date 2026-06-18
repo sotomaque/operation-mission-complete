@@ -20,7 +20,7 @@ export function DossierFrame({
   className?: string;
 }) {
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-10">
+    <main className="min-h-screen flex items-center justify-center px-3 py-6 sm:px-4 sm:py-10">
       <div
         className={cn(
           "w-full max-w-2xl",
@@ -28,25 +28,37 @@ export function DossierFrame({
           className,
         )}
       >
-        {/* Top band: title + classification stamp + file number */}
-        <div className="flex items-end justify-between gap-4 mb-3 font-mono text-xs text-dossier-fg-muted">
-          <div className="flex items-center gap-3">
-            <span className="text-copper-bright tracking-[0.3em] font-bold">
+        {/* Top band: title + file number. Mobile-tighter sizing so the
+            tracking-[0.3em] type doesn't wrap awkwardly on a 375px
+            viewport; the file number drops to its own line under
+            ~360px instead of crowding the title. */}
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 mb-3 font-mono text-[10px] sm:text-xs text-dossier-fg-muted">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="text-copper-bright tracking-[0.2em] sm:tracking-[0.3em] font-bold">
               OPERATION
             </span>
-            <span className="tracking-[0.3em]">MISSION COMPLETE</span>
+            <span className="tracking-[0.2em] sm:tracking-[0.3em]">
+              MISSION COMPLETE
+            </span>
           </div>
           {fileNumber ? (
-            <div className="tracking-[0.2em]">
+            <div className="tracking-[0.15em] sm:tracking-[0.2em]">
               FILE&nbsp;NO.&nbsp;{fileNumber}
             </div>
           ) : null}
         </div>
 
-        {/* Paper card */}
-        <article className="paper rounded-sm p-8 md:p-12 relative reveal">
-          {/* Classification stamp top-right */}
-          <div className="absolute top-6 right-6">
+        {/* Paper card. Tighter padding on mobile so the inner content
+            isn't fighting for horizontal space on a 375px viewport.
+            Classification stamp moves below the top edge on mobile so
+            it doesn't overlap the page heading. */}
+        <article className="paper rounded-sm p-5 sm:p-8 md:p-12 relative reveal">
+          {/* Classification stamp. On mobile, the stamp sits inline at
+              the top of the card content (`mb-4` block) instead of
+              absolute-positioned (which overlaps page headers at
+              narrow widths). At sm:+ it goes back to its absolute
+              top-right slot. */}
+          <div className="mb-4 sm:mb-0 sm:absolute sm:top-6 sm:right-6">
             <span className="stamp">{classification}</span>
           </div>
           {children}
@@ -56,16 +68,23 @@ export function DossierFrame({
             "wait — am I Josh?" link routes back to / where curious
             guests can pick "Yes" for the joke and permanently lock
             themselves out. Subtle so it reads as flavor text, not
-            navigation. */}
-        <div className="mt-3 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.25em] text-dossier-fg-muted">
-          <span>Distribution: Restricted</span>
+            navigation.
+
+            Mobile: the easter-egg link gets its own row centered
+            underneath the meta strip so the three items aren't
+            crammed at illegible sizes. */}
+        <div className="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-[10px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.25em] text-dossier-fg-muted">
+          <div className="flex items-center justify-between sm:justify-start gap-3 sm:gap-0">
+            <span>Distribution: Restricted</span>
+            <span className="sm:hidden">Self-destructs · 08·16·26</span>
+          </div>
           <a
             href="/"
-            className="text-dossier-fg-muted hover:text-copper-bright transition-colors"
+            className="text-dossier-fg-muted hover:text-copper-bright transition-colors order-first sm:order-none"
           >
             Wait — am I Josh?
           </a>
-          <span>Self-destructs · 08·16·26</span>
+          <span className="hidden sm:inline">Self-destructs · 08·16·26</span>
         </div>
       </div>
     </main>
