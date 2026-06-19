@@ -33,13 +33,13 @@ const SHEETS = [
   {
     code: "adventure",
     seal: "Compass Rose",
-    title: "Adventure + Welcome",
+    title: "Adventure + Celebration",
     note: "Includes the maritime expedition.",
   },
   {
     code: "welcome",
     seal: "Anchor",
-    title: "Welcome Party",
+    title: "Celebration",
     note: "The evening rendezvous only.",
   },
 ] as const;

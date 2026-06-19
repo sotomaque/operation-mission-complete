@@ -37,7 +37,7 @@ export default function MissionLanding() {
               Seal · Compass Rose
             </p>
             <p className="font-serif text-xl text-dossier-ink mb-1">
-              Adventure + Welcome
+              Adventure + Celebration
             </p>
             <p className="font-mono text-xs text-dossier-ink-muted">
               Daytime mystery + evening rendezvous.
@@ -51,7 +51,7 @@ export default function MissionLanding() {
               Seal · Anchor
             </p>
             <p className="font-serif text-xl text-dossier-ink mb-1">
-              Welcome Party
+              Celebration
             </p>
             <p className="font-mono text-xs text-dossier-ink-muted">
               The evening rendezvous only.
@@ -66,7 +66,7 @@ export default function MissionLanding() {
           href="/mission/welcome"
           className="text-copper hover:text-copper-bright underline underline-offset-2"
         >
-          Pick the welcome party — never the wrong choice.
+          Pick the Celebration — never the wrong choice.
         </Link>
       </p>
     </DossierFrame>
