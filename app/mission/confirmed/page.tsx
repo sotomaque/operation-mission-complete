@@ -45,7 +45,7 @@ export default async function ConfirmedPage({
               <ul className="font-mono text-sm text-dossier-ink space-y-0.5">
                 <li>· Layers — breeze on the water</li>
                 <li>· Closed-toe shoes</li>
-                <li>· Your best straight face for the welcome at 6:30</li>
+                <li>· Your best straight face for the celebration at 6:30</li>
               </ul>
             </div>
           </>
@@ -65,7 +65,7 @@ export default async function ConfirmedPage({
               See you shoreside.
             </h1>
             <p className="font-serif text-lg text-dossier-ink leading-snug">
-              Your name has been added to the welcome-party roster.
+              Your name has been added to the celebration roster.
               We'll send logistics as we approach the date.
             </p>
           </>

@@ -67,8 +67,8 @@ export function RsvpForm({
             active={rsvpChoice === "welcome"}
             onClick={() => setRsvpChoice("welcome")}
             top="B"
-            title="Welcome Party"
-            note="Shoreside, 6:30"
+            title="Celebration"
+            note="6:30 PM"
           />
           <ChoiceTile
             active={rsvpChoice === "declined"}
@@ -136,24 +136,13 @@ export function RsvpForm({
           </div>
 
           <div className="space-y-1.5">
-            <Label>Buffet selection</Label>
-            <div className="grid sm:grid-cols-2 gap-2">
-              <MealTile name="mealChoice" value="beef" label="Braised beef short rib" />
-              <MealTile name="mealChoice" value="chicken" label="Lemon-herb grilled chicken" />
-            </div>
-            <p className="font-mono text-[11px] text-dossier-ink-faint">
-              Buffet style — pick a primary; you may sample the other.
-            </p>
-          </div>
-
-          <div className="space-y-1.5">
             <Label htmlFor="dietaryRestrictions">
               Dietary restrictions
             </Label>
             <Textarea
               id="dietaryRestrictions"
               name="dietaryRestrictions"
-              placeholder="Allergies, intolerances, vegetarian / vegan, anything we should know…"
+              placeholder="Any allergies, intolerances, vegetarian / vegan, or anything we should be aware of…"
               maxLength={500}
             />
           </div>
@@ -163,7 +152,7 @@ export function RsvpForm({
       {state && !state.ok ? (
         <div className="border border-classified-red/50 bg-classified-red/10 rounded-sm px-3 py-2 font-mono text-sm text-classified-red">
           {state.capacityFull
-            ? "Vessel filled up while you were typing. We've switched you to Welcome Party — submit again."
+            ? "Vessel filled up while you were typing. We've switched you to the Celebration — submit again."
             : state.message}
         </div>
       ) : null}
@@ -210,27 +199,5 @@ function ChoiceTile({
         {note}
       </p>
     </button>
-  );
-}
-
-function MealTile({
-  name,
-  value,
-  label,
-}: {
-  name: string;
-  value: string;
-  label: string;
-}) {
-  return (
-    <label className="flex items-center gap-2 border border-dossier-ink/30 bg-dossier-paper/60 hover:bg-dossier-paper/80 rounded-sm p-2.5 cursor-pointer transition-colors has-[:checked]:border-copper has-[:checked]:bg-copper/15 has-[:checked]:ring-2 has-[:checked]:ring-copper/40">
-      <input
-        type="radio"
-        name={name}
-        value={value}
-        className="accent-copper"
-      />
-      <span className="font-mono text-sm text-dossier-ink">{label}</span>
-    </label>
   );
 }

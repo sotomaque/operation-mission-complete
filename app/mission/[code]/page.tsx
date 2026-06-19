@@ -145,7 +145,7 @@ function AdventureOptionCard() {
             </li>
             <li>
               <span className="text-dossier-ink-muted">Followed by</span>
-              · Welcome Party at 6:30 PM (same rendezvous point)
+              · Celebration at 6:30 PM
             </li>
           </ul>
         </div>
@@ -164,7 +164,7 @@ function AdventureFullNotice() {
         Vessel at capacity.
       </p>
       <p className="font-mono text-sm text-dossier-ink-muted">
-        Crew manifest is full. Please proceed with the Welcome Party
+        Crew manifest is full. Please proceed with the Celebration
         option — we'll see you on shore.
       </p>
     </div>
@@ -175,19 +175,15 @@ function WelcomeOptionCard() {
   return (
     <div className="border border-dossier-ink/30 bg-dossier-paper/60 rounded-sm p-5">
       <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper mb-1">
-        Option B · Welcome Party
+        Option B · Celebration
       </p>
       <p className="font-serif text-2xl text-dossier-ink leading-snug mb-2">
-        Join us shoreside at 6:30 PM
+        Join us for the Celebration at 6:30
       </p>
       <ul className="space-y-1 font-mono text-sm text-dossier-ink">
         <li>
           <span className="text-dossier-ink-muted">Arrival</span> · 6:30
           PM
-        </li>
-        <li>
-          <span className="text-dossier-ink-muted">Buffet</span> ·
-          Braised beef short rib or lemon-herb grilled chicken
         </li>
       </ul>
     </div>
