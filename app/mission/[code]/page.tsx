@@ -46,7 +46,7 @@ export default async function MissionRsvpPage({
   return (
     <>
       <GateBounce />
-      <DossierFrame fileNumber="OMC-1815" classification="EYES ONLY">
+      <DossierFrame fileNumber="OMC-1815" classification="CLASSIFIED">
         <header className="space-y-3 mb-8">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-dossier-ink-muted">
             Mission briefing · Step 03
