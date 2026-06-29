@@ -32,18 +32,18 @@ export default async function ConfirmedPage({
               className="text-5xl text-dossier-ink leading-tight"
               style={{ fontFamily: "'Pirata One', serif" }}
             >
-              Welcome aboard, agent.
+              Welcome, agent.
             </h1>
             <p className="font-serif text-lg text-dossier-ink leading-snug">
-              Your name has been added to the crew manifest. You sail
-              at half-past four.
+              Your name has been added to the manifest. The mission
+              begins at half-past four.
             </p>
             <div className="border-l-2 border-treasure-gold pl-4 space-y-1">
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-treasure-gold">
                 What to bring
               </p>
               <ul className="font-mono text-sm text-dossier-ink space-y-0.5">
-                <li>· Layers — breeze on the water</li>
+                <li>· A light jacket or sweater</li>
                 <li>· Closed-toe shoes</li>
                 <li>· Your best straight face for the celebration at 6:30</li>
               </ul>
