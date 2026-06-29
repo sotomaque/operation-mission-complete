@@ -33,10 +33,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Premium pairing: Pirata One (display, used only inside the
-            adventure card), Special Elite (typewriter body / dossier
-            text). Google Fonts; subset to display+swap so first paint
-            doesn't FOUT badly. */}
+        {/* Single typeface: Special Elite (typewriter body / dossier
+            text) — sells the "classified document" vibe end to end.
+            Google Fonts; display=swap so first paint doesn't FOUT
+            badly. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -45,7 +45,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Special+Elite&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
         />
       </head>
       <body className="antialiased">{children}</body>

@@ -115,24 +115,21 @@ export default async function MissionRsvpPage({
 
 function AdventureOptionCard() {
   return (
-    <div className="border border-treasure-gold/50 bg-pirate-deep/8 rounded-sm p-5 relative">
+    <div className="border border-brass/50 bg-brass/8 rounded-sm p-5 relative">
       <div className="flex items-start gap-3">
-        <div className="font-serif text-3xl text-treasure-gold leading-none mt-0.5">
-          ⚓
+        <div className="font-serif text-3xl text-brass leading-none mt-0.5">
+          ★
         </div>
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper mb-1">
             Option A · The Adventure
           </p>
-          <p
-            className="text-2xl text-dossier-ink leading-snug mb-2"
-            style={{ fontFamily: "'Pirata One', serif" }}
-          >
-            Rendezvous at four-thirty bells
+          <p className="font-serif text-2xl text-dossier-ink leading-snug mb-2">
+            Rendezvous at sixteen-thirty hours
           </p>
           <p className="font-mono text-sm text-dossier-ink mb-2">
             Rendezvous for the adventure at 4:30 — or join the
-            after-party at 6:30 (your call once you arrive).
+            celebration at 6:30 (your call once you arrive).
           </p>
           <ul className="space-y-1 font-mono text-sm text-dossier-ink">
             <li>
@@ -161,11 +158,11 @@ function AdventureFullNotice() {
         Option A · The Adventure
       </p>
       <p className="font-serif text-lg text-dossier-ink mb-1">
-        Vessel at capacity.
+        Operation at capacity.
       </p>
       <p className="font-mono text-sm text-dossier-ink-muted">
-        Crew manifest is full. Please proceed with the Celebration
-        option — we'll see you on shore.
+        The manifest is full. Please proceed with the Celebration
+        option — we'll see you there.
       </p>
     </div>
   );
