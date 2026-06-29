@@ -59,7 +59,7 @@ export function IdentityGate() {
   if (!checked) return null;
 
   return (
-    <DossierFrame fileNumber="OMC-0001" classification="EYES ONLY">
+    <DossierFrame fileNumber="OMC-0001" classification="CLASSIFIED">
       <header className="space-y-3 mb-10">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-dossier-ink-muted">
           Subject Verification · Step 01
