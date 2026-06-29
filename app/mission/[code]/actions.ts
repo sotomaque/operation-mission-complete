@@ -58,7 +58,10 @@ export async function submitRsvp(
     lastName: formData.get("lastName"),
     email: formData.get("email"),
     mobilePhone: formData.get("mobilePhone"),
-    guestCount: formData.get("guestCount"),
+    // Declined RSVPs don't render the party-size stepper, so no
+    // guestCount is submitted. Fall back to 1 (the DB column is
+    // NOT NULL with a 1–10 check) instead of failing validation.
+    guestCount: formData.get("guestCount") ?? 1,
     dietaryRestrictions: formData.get("dietaryRestrictions") || null,
     mealChoice: formData.get("mealChoice") || null,
   };
