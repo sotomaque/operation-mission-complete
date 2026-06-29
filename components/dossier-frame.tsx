@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 export function DossierFrame({
   children,
   fileNumber,
-  classification = "EYES ONLY",
+  classification = "CLASSIFIED",
   className,
 }: {
   children: React.ReactNode;
