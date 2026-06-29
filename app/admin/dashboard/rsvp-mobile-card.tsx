@@ -84,10 +84,10 @@ function ChoicePill({
   const map = {
     adventure: {
       label: "Adventure",
-      cls: "border-treasure-gold/60 bg-treasure-gold/15 text-treasure-gold",
+      cls: "border-brass/60 bg-brass/15 text-brass",
     },
     welcome: {
-      label: "Welcome",
+      label: "Celebration",
       cls: "border-copper/60 bg-copper/15 text-copper-bright",
     },
     declined: {

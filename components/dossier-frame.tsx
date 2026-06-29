@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
  * coordinate strip. Every public page (gate, decoy, RSVP) renders inside
  * one of these so the theme stays consistent.
  *
- * Pirate styling is contained to a CHILD card inside the paper, not the
- * frame itself — this stays "intelligence briefing."
+ * The accent styling is contained to a CHILD card inside the paper, not
+ * the frame itself — this stays "intelligence briefing."
  */
 export function DossierFrame({
   children,

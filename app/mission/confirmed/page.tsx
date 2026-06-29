@@ -1,10 +1,10 @@
 import { DossierFrame } from "@/components/dossier-frame";
 
 /**
- * Confirmation receipt after a successful RSVP. Pirate-themed for the
- * adventure path, dossier-styled for the welcome / declined paths. The
- * `?type=` query param drives the tonal difference but the layout is
- * the same.
+ * Confirmation receipt after a successful RSVP. The adventure path gets
+ * a brass accent; the celebration / declined paths stay plain dossier.
+ * The `?type=` query param drives the tonal difference but the layout
+ * is the same.
  */
 export default async function ConfirmedPage({
   searchParams,
@@ -28,18 +28,15 @@ export default async function ConfirmedPage({
 
         {adventure ? (
           <>
-            <h1
-              className="text-5xl text-dossier-ink leading-tight"
-              style={{ fontFamily: "'Pirata One', serif" }}
-            >
+            <h1 className="font-serif text-4xl md:text-5xl text-dossier-ink leading-tight">
               Welcome, agent.
             </h1>
             <p className="font-serif text-lg text-dossier-ink leading-snug">
               Your name has been added to the manifest. The mission
               begins at half-past four.
             </p>
-            <div className="border-l-2 border-treasure-gold pl-4 space-y-1">
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-treasure-gold">
+            <div className="border-l-2 border-brass pl-4 space-y-1">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-brass">
                 What to bring
               </p>
               <ul className="font-mono text-sm text-dossier-ink space-y-0.5">
@@ -62,7 +59,7 @@ export default async function ConfirmedPage({
         ) : (
           <>
             <h1 className="font-serif text-4xl md:text-5xl text-dossier-ink leading-tight">
-              See you shoreside.
+              See you there.
             </h1>
             <p className="font-serif text-lg text-dossier-ink leading-snug">
               Your name has been added to the celebration roster.

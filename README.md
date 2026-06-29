@@ -1,6 +1,6 @@
 # Operation: Mission Complete
 
-A surprise-party RSVP site with a classified-mission × pirate-adventure theme.
+A surprise-party RSVP site with a "Top Secret" classified-intelligence theme.
 
 - **Live event:** Saturday, August 15, 2026
 - **Subject:** Josh's 50th
@@ -88,6 +88,6 @@ No CI workflow file needed. Vercel auto-deploys on push to `main`.
 
 ## Theme
 
-Outer frame is "classified dossier" (parchment, monospace, redacted bars, EYES ONLY stamps, copper accents on dark navy). The Adventure-only option card and the Adventure confirmation page bleed pirate styling (Pirata One display font, treasure-gold accent). Welcome / Declined surfaces stay pure-dossier.
+One consistent "classified dossier" treatment throughout (parchment, typewriter type, redacted bars, CLASSIFIED stamps, copper accents on dark navy). The Adventure option card and Adventure confirmation page get a brass accent to stand out, but the language, fonts, and styling stay uniformly "Top Secret" — no nautical/pirate vibe.
 
-Premium not cartoonish — single accent color, real serif/mono pairing, paper grain via SVG noise (no PNG textures).
+Premium not cartoonish — copper/brass accents, a single typewriter typeface (Special Elite) + mono, paper grain via SVG noise (no PNG textures).

@@ -32,13 +32,13 @@ import { requireAdmin } from "@/lib/admin-guard";
 const SHEETS = [
   {
     code: "adventure",
-    seal: "Compass Rose",
+    seal: "Alpha",
     title: "Adventure + Celebration",
-    note: "Includes the maritime expedition.",
+    note: "Includes the daytime operation.",
   },
   {
     code: "welcome",
-    seal: "Anchor",
+    seal: "Bravo",
     title: "Celebration",
     note: "The evening rendezvous only.",
   },

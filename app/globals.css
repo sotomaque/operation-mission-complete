@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 /*
- * Theme: classified-dossier outer frame × pirate-adventure inner reveal.
+ * Theme: classified-dossier — "Top Secret" intelligence briefing.
  *
  * Palette: aged-parchment ink on deep-navy ground, copper + brass accents.
- * Real serif/mono pairings, no cartoon. The single accent color (copper)
- * shows up sparingly so the redacted bars / coordinate strips read as
- * type, not decoration.
+ * One typewriter typeface (Special Elite) + mono, no cartoon. The accent
+ * colors (copper / brass) show up sparingly so the redacted bars /
+ * coordinate strips read as type, not decoration.
  */
 
 @theme {
@@ -35,14 +35,9 @@
   --color-classified-red: #8b1f1f;
   --color-classified-red-bright: #b03030;
 
-  /* Pirate (used only inside the adventure card) */
-  --color-treasure-gold: #d4af37;
-  --color-pirate-deep: #1a2a3a;
-
   /* Type */
   --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Courier New", monospace;
   --font-serif: "Special Elite", "Courier Prime", "Georgia", serif;
-  --font-pirate: "Pirata One", "Special Elite", serif;
 }
 
 html {

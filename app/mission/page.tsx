@@ -34,7 +34,7 @@ export default function MissionLanding() {
         <Link href="/mission/adventure" className="group block">
           <div className="border border-dossier-ink/30 bg-dossier-paper/60 rounded-sm p-5 h-full transition-all hover:border-copper hover:bg-dossier-paper/80 hover:-translate-y-0.5">
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper mb-2">
-              Seal · Compass Rose
+              Seal · Alpha
             </p>
             <p className="font-serif text-xl text-dossier-ink mb-1">
               Adventure + Celebration
@@ -48,7 +48,7 @@ export default function MissionLanding() {
         <Link href="/mission/welcome" className="group block">
           <div className="border border-dossier-ink/30 bg-dossier-paper/60 rounded-sm p-5 h-full transition-all hover:border-copper hover:bg-dossier-paper/80 hover:-translate-y-0.5">
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper mb-2">
-              Seal · Anchor
+              Seal · Bravo
             </p>
             <p className="font-serif text-xl text-dossier-ink mb-1">
               Celebration

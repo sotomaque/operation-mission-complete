@@ -147,7 +147,7 @@ export function RsvpForm({
       {state && !state.ok ? (
         <div className="border border-classified-red/50 bg-classified-red/10 rounded-sm px-3 py-2 font-mono text-sm text-classified-red">
           {state.capacityFull
-            ? "Vessel filled up while you were typing. We've switched you to the Celebration — submit again."
+            ? "The roster filled up while you were typing. We've switched you to the Celebration — submit again."
             : state.message}
         </div>
       ) : null}
