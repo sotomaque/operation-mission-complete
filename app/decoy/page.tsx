@@ -1,3 +1,4 @@
+import { DecoyEscape } from "@/components/decoy-escape";
 import { DossierFrame } from "@/components/dossier-frame";
 
 /**
@@ -40,10 +41,11 @@ export default function DecoyPage() {
           will not find what you are looking for here.
         </p>
 
-        <div className="pt-6 border-t border-dossier-ink/20">
+        <div className="pt-6 border-t border-dossier-ink/20 space-y-5">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-dossier-ink-faint">
             Carry on as you were.
           </p>
+          <DecoyEscape />
         </div>
       </div>
     </DossierFrame>

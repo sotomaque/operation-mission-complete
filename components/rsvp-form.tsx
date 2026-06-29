@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { type ReactNode, useActionState, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -46,6 +46,10 @@ export function RsvpForm({
     "adventure" | "welcome" | "declined"
   >(defaultChoice);
 
+  // Party size as a stepper (click up/down) instead of a free-text
+  // number field — friendlier on mobile than clearing the "1" to type.
+  const [guestCount, setGuestCount] = useState(1);
+
   return (
     <form action={formAction} className="space-y-6">
       <input type="hidden" name="inviteType" value={inviteType} />
@@ -59,15 +63,15 @@ export function RsvpForm({
               active={rsvpChoice === "adventure"}
               onClick={() => setRsvpChoice("adventure")}
               top="A"
-              title="Adventure"
-              note="Boat at 4:30"
+              title="Adventure + Celebration"
+              note="4:30 PM"
             />
           ) : null}
           <ChoiceTile
             active={rsvpChoice === "welcome"}
             onClick={() => setRsvpChoice("welcome")}
             top="B"
-            title="Celebration"
+            title="Celebration only"
             note="6:30 PM"
           />
           <ChoiceTile
@@ -123,16 +127,7 @@ export function RsvpForm({
         <>
           <div className="space-y-1.5">
             <Label htmlFor="guestCount">Total in your party</Label>
-            <Input
-              id="guestCount"
-              name="guestCount"
-              type="number"
-              min={1}
-              max={10}
-              defaultValue={1}
-              required
-              className="w-32"
-            />
+            <GuestCountStepper value={guestCount} onChange={setGuestCount} />
           </div>
 
           <div className="space-y-1.5">
@@ -198,6 +193,71 @@ function ChoiceTile({
       <p className="font-mono text-[11px] text-dossier-ink-muted mt-0.5">
         {note}
       </p>
+    </button>
+  );
+}
+
+const MIN_GUESTS = 1;
+const MAX_GUESTS = 10;
+
+function GuestCountStepper({
+  value,
+  onChange,
+}: {
+  value: number;
+  onChange: (next: number) => void;
+}) {
+  const clamp = (n: number) => Math.min(MAX_GUESTS, Math.max(MIN_GUESTS, n));
+
+  return (
+    <div className="flex items-center gap-3">
+      {/* Mirror the stepper value into a hidden field so the server
+          action still reads `guestCount` from FormData. */}
+      <input type="hidden" name="guestCount" value={value} />
+      <StepperButton
+        label="Decrease party size"
+        disabled={value <= MIN_GUESTS}
+        onClick={() => onChange(clamp(value - 1))}
+      >
+        −
+      </StepperButton>
+      <span
+        aria-live="polite"
+        className="font-mono text-lg text-dossier-ink w-10 text-center tabular-nums"
+      >
+        {value}
+      </span>
+      <StepperButton
+        label="Increase party size"
+        disabled={value >= MAX_GUESTS}
+        onClick={() => onChange(clamp(value + 1))}
+      >
+        +
+      </StepperButton>
+    </div>
+  );
+}
+
+function StepperButton({
+  label,
+  disabled,
+  onClick,
+  children,
+}: {
+  label: string;
+  disabled: boolean;
+  onClick: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      disabled={disabled}
+      onClick={onClick}
+      className="flex h-10 w-10 items-center justify-center rounded-sm border border-dossier-ink/30 bg-dossier-paper/60 font-mono text-xl leading-none text-dossier-ink transition-colors hover:bg-dossier-paper/80 hover:border-copper disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-dossier-paper/60 disabled:hover:border-dossier-ink/30"
+    >
+      {children}
     </button>
   );
 }

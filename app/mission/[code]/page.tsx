@@ -175,7 +175,7 @@ function WelcomeOptionCard() {
   return (
     <div className="border border-dossier-ink/30 bg-dossier-paper/60 rounded-sm p-5">
       <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-copper mb-1">
-        Option B · Celebration
+        Option B · Celebration only
       </p>
       <p className="font-serif text-2xl text-dossier-ink leading-snug mb-2">
         Join us for the Celebration at 6:30
